@@ -19,7 +19,7 @@
             <p class="fw-bold">{{ $project->type?->name }}</p>
         </div>
         <div class="mt-5">
-            <h3>Tecnologia utilizzata:</h3>
+            <h3>Tecnologie utilizzate:</h3>
             @forelse ($project->technologies as $technology)
                 <p class="fw-bold">{{ $technology->name }}</p>
                 <h5>Descrizione della tescnologia utilizzata:</h4>

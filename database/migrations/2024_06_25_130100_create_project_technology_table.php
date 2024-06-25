@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('technology_id')->references('id')->on('technologies')->cascadeOnDelete();
 
             // primarykey
-            $table->primary('project_id', 'technology_id');
+            $table->primary(['project_id', 'technology_id']);
         });
     }
 
