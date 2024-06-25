@@ -19,6 +19,15 @@
             <p class="fw-bold">{{ $project->type?->name }}</p>
         </div>
         <div>
+            <h3>Tecnologia utilizzata:</h3>
+            @forelse ($project->technologies as $technology)
+                <p class="fw-bold">{{ $technology->name }}</p>
+                <p>{{ $technology->description }}</p>
+            @empty
+                <p>Nessuna tecnologia presente</p>
+            @endforelse
+        </div>
+        <div>
             <h3>Contenuto:</h3>
             <p>{{ $project->content }}</p>
         </div>
