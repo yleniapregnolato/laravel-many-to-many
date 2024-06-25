@@ -10,28 +10,29 @@
             </div>
         @endif
 
-        <div>
+        <div class="mt-5">
             <h3>Titolo:</h3>
             <p class="fw-bold">{{ $project->title }}</p>
         </div>
-        <div>
+        <div class="mt-5">
             <h3>Tipologia:</h3>
             <p class="fw-bold">{{ $project->type?->name }}</p>
         </div>
-        <div>
+        <div class="mt-5">
             <h3>Tecnologia utilizzata:</h3>
             @forelse ($project->technologies as $technology)
                 <p class="fw-bold">{{ $technology->name }}</p>
+                <h5>Descrizione della tescnologia utilizzata:</h4>
                 <p>{{ $technology->description }}</p>
             @empty
                 <p>Nessuna tecnologia presente</p>
             @endforelse
         </div>
-        <div>
+        <div class="mt-5">
             <h3>Contenuto:</h3>
             <p>{{ $project->content }}</p>
         </div>
-        <div>
+        <div class="mt-5">
             <h3>Slug:</h3>
             <p>{{ $project->slug }}</p>
         </div>
