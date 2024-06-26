@@ -71,7 +71,7 @@ class ProjectController extends Controller
     {
         $types = Type::all();
         $technologies = Technology::all();
-        return view('admin.projects.edit', compact('project', 'types'));
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -94,7 +94,7 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         $project->technologies()->detach();
-        
+
         $project->delete();
         return redirect()->route('admin.projects.index')->with('message', 'project ' . $project->title . ' è stato cancellato con successo');
     }
