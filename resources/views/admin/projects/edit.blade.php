@@ -35,6 +35,16 @@
                 </select>
             </div>
 
+            <div>
+                <p>Tecnologie</p>
+                <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                    @foreach ($technologies as $technology)
+                        <input @checked($project->technologies->contains($technology)) name="technologies[]" type="checkbox" class="btn-check" value="{{ $technology->id }}" id="technology-{{ $technology->id }}" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="technology-{{ $technology->id }}">{{ $technology->name }}</label>
+                    @endforeach
+                </div>
+            </div>
+
             <div class="mb-3">
                 <label for="content" class="form-label">Contenuto</label>
                 <textarea class="form-control" id="content" name="content" rows="3">{{ old('content', $project->content) }}</textarea>
