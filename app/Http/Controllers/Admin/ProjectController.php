@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
+use App\Models\Technology;
 use App\Models\Type;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
@@ -29,7 +30,8 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view('admin.projects.create', compact('types'));
+        $technologies = Technology::all();
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -45,6 +47,12 @@ class ProjectController extends Controller
         $project->save();
 
         $projects = Project::all();
+
+        // aggiungo le tecnologie selezionate
+        if ($request->has('technologies')) {
+            $project->technologies()->attach($request->technologies);
+        }
+        
         return view('admin.projects.index', ['success'=> 'Progetto inserito', 'projects'=>$projects]);
     }
 

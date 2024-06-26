@@ -28,9 +28,19 @@
                 <select name="type_id" id="type">
                     <option value="">SELEZIONA</option>
                     @foreach ($types as $type)
-                        <option @selected(old('type_id') == $type->id ) value="{{ $type->id }}">{{ $type->name }}</option>
+                        <option @selected(old('type_id') == $type->id) value="{{ $type->id }}">{{ $type->name }}</option>
                     @endforeach
                 </select>
+            </div>
+
+            <div>
+                <p>Tecnologie</p>
+                <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                    @foreach ($technologies as $technology)
+                        <input name="technologies[]" type="checkbox" class="btn-check" value="{{ $technology->id }}" id="technology-{{ $technology->id }}" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="technology-{{ $technology->id }}">{{ $technology->name }}</label>
+                    @endforeach
+                </div>
             </div>
 
             <div class="mb-3">
@@ -40,7 +50,8 @@
 
             <div class="mb-3">
                 <label for="start_date" class="form-label">Data di inizio</label>
-                <input type="text" class="form-control" id="start_date" name="start_date" value="{{ old('start_date') }}">
+                <input type="text" class="form-control" id="start_date" name="start_date"
+                    value="{{ old('start_date') }}">
             </div>
 
             <div class="mb-3">
