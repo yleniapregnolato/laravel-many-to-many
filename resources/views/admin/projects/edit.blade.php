@@ -30,7 +30,7 @@
                 <select name="type_id" id="type">
                     <option value="">SELEZIONA</option>
                     @foreach ($types as $type)
-                        <option @selected( old('type_id', $project->type?->id == $type->id)) value="{{ $type->id }}">{{ $type->name }}</option>
+                        <option @selected(old('type_id', $project->type?->id == $type->id)) value="{{ $type->id }}">{{ $type->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -39,7 +39,14 @@
                 <p>Tecnologie</p>
                 <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
                     @foreach ($technologies as $technology)
-                        <input @checked($project->technologies->contains($technology)) name="technologies[]" type="checkbox" class="btn-check" value="{{ $technology->id }}" id="technology-{{ $technology->id }}" autocomplete="off">
+                        @if (old('technologies') === null)
+                            <input @checked($project->technologies->contains($technology)) name="technologies[]" type="checkbox" class="btn-check"
+                                value="{{ $technology->id }}" id="technology-{{ $technology->id }}" autocomplete="off">
+                            <label class="btn btn-outline-primary"
+                                for="technology-{{ $technology->id }}">{{ $technology->name }}</label>
+                        @endif
+                        <input @checked(in_array($technology->id), old('technologies')) name="technologies[]" type="checkbox" class="btn-check"
+                            value="{{ $technology->id }}" id="technology-{{ $technology->id }}" autocomplete="off">
                         <label class="btn btn-outline-primary" for="technology-{{ $technology->id }}">{{ $technology->name }}</label>
                     @endforeach
                 </div>
@@ -58,7 +65,8 @@
 
             <div class="mb-3">
                 <label for="end_date" class="form-label">Data di fine</label>
-                <input type="text" class="form-control" id="end_date" name="end_date" value="{{ old('end_date', $project->end_date) }}">
+                <input type="text" class="form-control" id="end_date" name="end_date"
+                    value="{{ old('end_date', $project->end_date) }}">
             </div>
 
             <button class="btn btn-success" type="submit">Salva</button>
